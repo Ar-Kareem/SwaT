@@ -1,0 +1,25 @@
+{
+  "schema": "multikv.continuation_nll_manifest.v1",
+  "output": "multiagent/data/continuation_nll/heldout_2k2k.jsonl",
+  "sender_model": "Qwen3-4B",
+  "sender_tokenizer": "$MULTIKV_MODELS_ROOT/qwen/Qwen3-4B",
+  "receiver_model": "llama3-8b-instruct",
+  "receiver_tokenizer": "$MULTIKV_MODELS_ROOT/llama3/models--meta-llama--Meta-Llama-3-8B-Instruct/snapshots/c4a54320a52ed5f88b7a2f84496903ea4ff07b45",
+  "seed": 43,
+  "samples": 400,
+  "samples_per_dataset": 80,
+  "datasets": [
+    "pg19",
+    "wikitext103",
+    "govreport",
+    "arxiv",
+    "pubmed"
+  ],
+  "prefix_tokens_per_sample": 2048,
+  "continuation_tokens_per_sample": 2048,
+  "receiver_window_stride": 2048,
+  "total_receiver_tokens": 1638400,
+  "total_scored_tokens": 818800,
+  "receiver_limit": 8192,
+  "design_runtime_target_seconds": 120
+}

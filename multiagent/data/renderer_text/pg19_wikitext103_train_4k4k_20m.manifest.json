@@ -1,0 +1,12 @@
+{
+  "schema": "multikv.renderer_continuation_mix_manifest.v1",
+  "output": "multiagent/data/renderer_text/pg19_wikitext103_train_4k4k_20m.jsonl",
+  "seed": 43,
+  "samples": 2442,
+  "samples_per_source": 1221,
+  "total_receiver_tokens": 20004864,
+  "sources": {
+    "pg19": "multiagent/data/renderer_text/pg19_train_4k4k_20m.jsonl",
+    "wikitext103": "multiagent/data/renderer_text/wikitext103_train_4k4k_10m.jsonl"
+  }
+}

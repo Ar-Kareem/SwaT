@@ -1,0 +1,84 @@
+{
+  "output": "multiagent/outputs/exp2_sweep_truncated",
+  "scratch": "multiagent/outputs/exp2_sweep_truncated_scratch",
+  "seed": 43,
+  "contexts_per_dataset": 200,
+  "max_length": 8192,
+  "max_new_tokens": 64,
+  "receiver_batch_size": 16,
+  "summarizer_batch_size": 16,
+  "summarizer_batch_size_overrides": {
+    "qwen3-32b": 4
+  },
+  "prompts": [
+    "summarize_very_concise",
+    "summarize_concise",
+    "summarize",
+    "summarize_keypoints_questions",
+    "summarize_indepth"
+  ],
+  "summarizer_backend": "vllm",
+  "vllm_gpu_memory_utilization": {
+    "qwen3-32b": 0.94
+  },
+  "receiver_batch_size_overrides": {
+    "15B": 4
+  },
+  "summary_max_new_tokens": 4096,
+  "am_max_length": 9000,
+  "am_fit_receiver_tokens": 7500,
+  "fit_filter": {
+    "tokens": 7500,
+    "tokenizer": "llama3-8b-instruct"
+  },
+  "am_decode_backend": "eager",
+  "receiver_engine": "vllm",
+  "datasets": {
+    "longhealth": "longhealth+ppc=1:test"
+  },
+  "variants": {
+    "truncated": {
+      "context_tokens": null,
+      "head_tokens": 7500,
+      "head_tokenizer": "llama3-8b-instruct",
+      "summarizer_max_length": 20480
+    }
+  },
+  "pairs": {
+    "14E": {
+      "sender": "qwen3-4b",
+      "receiver": "llama3-8b-instruct",
+      "variant": "truncated",
+      "fit_filter": true
+    },
+    "15A": {
+      "sender": "llama3-8b-instruct",
+      "receiver": "qwen3-14b",
+      "variant": "truncated",
+      "fit_filter": true
+    },
+    "15H": {
+      "sender": "gemma-3-12b-it",
+      "receiver": "qwen3-4b",
+      "variant": "truncated",
+      "fit_filter": true
+    }
+  },
+  "am": {
+    "14E": {
+      "renderer": "multiagent/outputs_mine/swat/14E/stage2/exit-checkpoint-24000/renderer.pt",
+      "query_transfer": "multiagent/outputs_mine/swat_query_transfer/14E/gold-checkpoint-4000/query_transfer.pt",
+      "budget": "multiagent/model/head_budget_optimization/head_budgets/Llama-3.1-8B-Instruct/optimized_agnostic.json"
+    },
+    "15A": {
+      "renderer": "multiagent/outputs_mine/swat/15A/stage2/exit-checkpoint-24000/renderer.pt",
+      "query_transfer": "multiagent/outputs_mine/swat_query_transfer/15A/exit-checkpoint-6048/query_transfer.pt",
+      "budget": "multiagent/model/head_budget_optimization/head_budgets/Qwen3-14B/optimized_agnostic.json"
+    },
+    "15H": {
+      "renderer": "multiagent/outputs_mine/swat/15H/stage2/exit-checkpoint-24000/renderer.pt",
+      "query_transfer": "multiagent/outputs_mine/swat_query_transfer/15H/gold-checkpoint-2000/query_transfer.pt",
+      "budget": "multiagent/model/head_budget_optimization/head_budgets/Qwen3-4B/optimized_agnostic.json"
+    }
+  }
+}

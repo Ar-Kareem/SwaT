@@ -1,0 +1,27 @@
+{
+  "version": 1,
+  "dataset": "hotpotqa_interleaved",
+  "split": "validation",
+  "source": "$MULTIKV_DATASETS_ROOT/snapshots/hotpotqa__hotpot_qa/distractor",
+  "source_rows": 7405,
+  "strict_base_questions_available": 2182,
+  "strict_base_questions_requested": 2182,
+  "variants_requested": 3,
+  "rows_written": 6546,
+  "rows_by_variant": {
+    "0": 2182,
+    "1": 2182,
+    "2": 2182
+  },
+  "unique_source_questions_written": 2182,
+  "target_context_tokens_qwen": 28000,
+  "tail_tokens_qwen": 8192,
+  "qwen_native_window": 40960,
+  "global_am_chunk_tokens": 4096,
+  "global_am_repeat_instruction_tokens": 19,
+  "maximum_expected_global_am_position": 32371,
+  "max_output_bytes": 950000000,
+  "stopped_at_size_cap": false,
+  "output_bytes": 794694995,
+  "independence_caveat": "Placement variants of the same source_id are not independent evaluation samples; use variant=0 for the primary unique-question evaluation."
+}

@@ -1,0 +1,20 @@
+{
+  "schema": "multikv.renderer_continuation_manifest.v1",
+  "output": "multiagent/data/renderer_text/pg19_train_4k4k_20m.jsonl",
+  "source_repo": "emozilla/pg19",
+  "source_config": "default",
+  "source_split": "train",
+  "source_start_offset": 631,
+  "source_rows_used": 247,
+  "sender_model": "Qwen3-4B",
+  "sender_tokenizer": "$MULTIKV_MODELS_ROOT/qwen/Qwen3-4B",
+  "receiver_model": "llama3-8b-instruct",
+  "receiver_tokenizer": "$MULTIKV_MODELS_ROOT/llama3/models--meta-llama--Meta-Llama-3-8B-Instruct/snapshots/c4a54320a52ed5f88b7a2f84496903ea4ff07b45",
+  "seed": 43,
+  "samples": 2442,
+  "prefix_tokens_per_sample": 4096,
+  "continuation_tokens_per_sample": 4096,
+  "total_receiver_tokens": 20004864,
+  "target_receiver_tokens": 20000000,
+  "skipped_unstable_token_boundaries": 2
+}

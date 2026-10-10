@@ -1,0 +1,107 @@
+{
+  "name": "exp1",
+  "sender": "granite-3.3-8b-instruct",
+  "receiver": "HuggingFaceTB/SmolLM3-3B",
+  "renderer": "{repo}/multiagent/outputs_mine/swat/granite_smollm3/stage2/exit-checkpoint-24000/renderer.pt",
+  "budget": "uniform",
+
+  "train_tq": {
+    "features": {
+      "gpus": 2,
+      "args": {
+        "sender-model": "{sender}",
+        "receiver-model": "{receiver}",
+        "datasets": ["qasper+nox:train", "quality:train"],
+        "limit-per-dataset": 4000,
+        "num-contexts": 128,
+        "pairs-per-context": 128,
+        "min-aligned": 64,
+        "max-length": 8192,
+        "seed": 0,
+        "device": "cuda:0",
+        "receiver-device": "cuda:1",
+        "output": "{run}/tq/head_pairings/features.pt"
+      }
+    },
+    "pairing": {
+      "gpus": 1,
+      "args": {
+        "features": "{features}",
+        "allowed-width": 7,
+        "device": "cuda:0"
+      }
+    },
+    "train": {
+      "gpus": 1,
+      "args": {
+        "sender-model": "{sender}",
+        "receiver-model": "{receiver}",
+        "architecture": "mlp",
+        "expansion": 8,
+        "pairing-file": "{pairing}",
+        "datasets": ["qasper+nox:train", "quality:train"],
+        "max-length": 4000,
+        "query-samples": 1024,
+        "batch-size": 1,
+        "epochs": 6,
+        "max-steps": 2000,
+        "learning-rate": 1e-4,
+        "lr-scheduler": "cosine",
+        "warmup-steps": 100,
+        "weight-decay": 0.001,
+        "max-grad-norm": 5.0,
+        "device": "cuda:0",
+        "dtype": "bfloat16",
+        "report-every": 25,
+        "save-every": 500,
+        "seed": 43,
+        "output-dir": "{run}/tq"
+      }
+    }
+  },
+
+  "pair": {
+    "variant": "full",
+    "variant_overrides": {"longhealth": "truncated"},
+    "fit_filter": true
+  },
+
+  "sweep": {
+    "seed": 43,
+    "contexts_per_dataset": 200,
+    "contexts_per_dataset_overrides": {"qasper": 416},
+    "max_length": 8192,
+    "max_new_tokens": 64,
+    "receiver_batch_size": 16,
+    "summarizer_batch_size": 16,
+    "prompts": ["summarize_very_concise", "summarize_concise", "summarize", "summarize_keypoints_questions", "summarize_indepth"],
+    "datasets": {
+      "narrativeqa": "narrativeqa+terse:test",
+      "quality": "quality:dev",
+      "qasper": "qasper:test",
+      "hotpotqa": "hotpotqa+terse:validation",
+      "musique": "musique+terse:validation",
+      "longhealth": "longhealth+ppc=1:test",
+      "squad": "squad+terse:validation"
+    },
+    "variants": {
+      "full": {"context_tokens": null, "summarizer_max_length": 20480},
+      "truncated": {"context_tokens": null, "head_tokens": 7500, "head_tokenizer": "{receiver}", "summarizer_max_length": 20480}
+    },
+    "summary_max_new_tokens": 4096,
+    "summarizer_backend": "vllm",
+    "receiver_engine": "vllm",
+    "fit_filter": {"tokens": 7500, "tokenizer": "{receiver}"},
+    "am_max_length": 9000,
+    "am_fit_receiver_tokens": 7500,
+    "am_decode_backend": "eager"
+  },
+
+  "gpus": {"prepare": 1, "summaries": 1, "t2t": 1, "am": 1},
+
+  "speed": {
+    "enabled": true,
+    "contexts": 20,
+    "gpus": 1
+  }
+}

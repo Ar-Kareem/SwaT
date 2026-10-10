@@ -1,0 +1,18 @@
+{
+  "status": "validated",
+  "sha256": "a1370add86d53075bbc6cddfd08d1a7ff35ab3434ed094fa1c5fd8ad3630cbb4",
+  "records": 10336,
+  "unique_records": 10336,
+  "per_dataset_counts": {
+    "gsm8k": 7473,
+    "math-algebra": 1744,
+    "arc-c": 1119
+  },
+  "cutoff_count": 217,
+  "cutoff_per_dataset": {
+    "gsm8k": 117,
+    "math-algebra": 99,
+    "arc-c": 1
+  },
+  "receiver_model": "qwen3-8b"
+}

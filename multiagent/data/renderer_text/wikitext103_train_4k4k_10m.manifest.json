@@ -1,0 +1,22 @@
+{
+  "schema": "multikv.renderer_continuation_manifest.v1",
+  "output": "multiagent/data/renderer_text/wikitext103_train_4k4k_10m.jsonl",
+  "source_repo": "Salesforce/wikitext",
+  "source_config": "wikitext-103-raw-v1",
+  "source_split": "train",
+  "source_parquet_shards": [
+    0
+  ],
+  "source_articles_used": 1127,
+  "sender_model": "Qwen3-4B",
+  "sender_tokenizer": "$MULTIKV_MODELS_ROOT/qwen/Qwen3-4B",
+  "receiver_model": "llama3-8b-instruct",
+  "receiver_tokenizer": "$MULTIKV_MODELS_ROOT/llama3/models--meta-llama--Meta-Llama-3-8B-Instruct/snapshots/c4a54320a52ed5f88b7a2f84496903ea4ff07b45",
+  "seed": 43,
+  "samples": 1221,
+  "prefix_tokens_per_sample": 4096,
+  "continuation_tokens_per_sample": 4096,
+  "total_receiver_tokens": 10002432,
+  "target_receiver_tokens": 10000000,
+  "skipped_unstable_token_boundaries": 0
+}
